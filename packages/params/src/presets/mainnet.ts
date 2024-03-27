@@ -27,7 +27,7 @@ export const mainnetPreset: BeaconPreset = {
   // 2**0 * 10**9 (= 1,000,000,000) Gwei
   MIN_DEPOSIT_AMOUNT: 1000000000,
   // 2**5 * 10**9 (= 32,000,000,000) Gwei
-  MAX_EFFECTIVE_BALANCE: 32000000000,
+  MAX_EFFECTIVE_BALANCE: 320000000000,
   // 2**0 * 10**9 (= 1,000,000,000) Gwei
   EFFECTIVE_BALANCE_INCREMENT: 1000000000,
 
@@ -62,7 +62,7 @@ export const mainnetPreset: BeaconPreset = {
   // Reward and penalty quotients
   // ---------------------------------------------------------------
   // 2**6 (= 64)
-  BASE_REWARD_FACTOR: 64,
+  BASE_REWARD_FACTOR: 0,
   // 2**9 (= 512)
   WHISTLEBLOWER_REWARD_QUOTIENT: 512,
   // 2**3 (= 8)

@@ -1,6 +1,4 @@
-<p align="center"><a href="https://chainsafe.github.io/lodestar"><img width="500" title="Lodestar" src='assets/lodestar_icon_text_black_stroke.png' /></a></p>
-
-# Lodestar Ethereum Consensus Implementation
+# Canxium Consensus Implementation (Fork of Lodestar)
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/chainsafe/lodestar?label=Github)](https://github.com/ChainSafe/lodestar/releases/latest)
 [![Docker Image Version (latest by date)](https://img.shields.io/docker/v/chainsafe/lodestar?color=blue&label=Docker&sort=semver)](https://hub.docker.com/r/chainsafe/lodestar)
@@ -9,8 +7,6 @@
 ![Node Version](https://img.shields.io/badge/node-20.x-green)
 [![codecov](https://codecov.io/gh/ChainSafe/lodestar/graph/badge.svg)](https://codecov.io/gh/ChainSafe/lodestar)
 [![gitpoap badge](https://public-api.gitpoap.io/v1/repo/ChainSafe/lodestar/badge)](https://www.gitpoap.io/gh/ChainSafe/lodestar)
-
-[Lodestar](https://lodestar.chainsafe.io) is a TypeScript implementation of the [Ethereum Consensus specification](https://github.com/ethereum/consensus-specs) developed by [ChainSafe Systems](https://chainsafe.io).
 
 ## Getting started
 

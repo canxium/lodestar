@@ -7,6 +7,7 @@ import {sepoliaChainConfig} from "./chainConfig/networks/sepolia.js";
 import {holeskyChainConfig} from "./chainConfig/networks/holesky.js";
 import {chiadoChainConfig} from "./chainConfig/networks/chiado.js";
 import {ephemeryChainConfig} from "./chainConfig/networks/ephemery.js";
+import {praseodyChainConfig} from "./chainConfig/networks/praseody.js";
 
 export {
   mainnetChainConfig,
@@ -17,9 +18,10 @@ export {
   holeskyChainConfig,
   chiadoChainConfig,
   ephemeryChainConfig,
+  praseodyChainConfig,
 };
 
-export type NetworkName = "mainnet" | "gnosis" | "goerli" | "ropsten" | "sepolia" | "holesky" | "chiado" | "ephemery";
+export type NetworkName = "mainnet" | "gnosis" | "goerli" | "ropsten" | "sepolia" | "holesky" | "chiado" | "ephemery" | "praseody";
 export const networksChainConfig: Record<NetworkName, ChainConfig> = {
   mainnet: mainnetChainConfig,
   gnosis: gnosisChainConfig,
@@ -29,6 +31,7 @@ export const networksChainConfig: Record<NetworkName, ChainConfig> = {
   holesky: holeskyChainConfig,
   chiado: chiadoChainConfig,
   ephemery: ephemeryChainConfig,
+  praseody: praseodyChainConfig,
 };
 
 export type GenesisData = {
@@ -67,6 +70,10 @@ export const genesisData: Record<NetworkName, GenesisData> = {
   },
   ephemery: {
     genesisTime: ephemeryChainConfig.MIN_GENESIS_TIME + ephemeryChainConfig.GENESIS_DELAY,
+    genesisValidatorsRoot: "0x0000000000000000000000000000000000000000000000000000000000000000",
+  },
+  praseody: {
+    genesisTime: praseodyChainConfig.MIN_GENESIS_TIME + praseodyChainConfig.GENESIS_DELAY,
     genesisValidatorsRoot: "0x0000000000000000000000000000000000000000000000000000000000000000",
   },
 };
