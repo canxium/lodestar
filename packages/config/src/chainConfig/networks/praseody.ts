@@ -26,7 +26,7 @@ export const praseodyChainConfig: ChainConfig = {
 
   GENESIS_FORK_VERSION: b("0x00322300"),
 
-  GENESIS_DELAY: 1800,
+  GENESIS_DELAY: 7200,
 
   // Forking
   ALTAIR_FORK_VERSION: b("0x00323300"),
