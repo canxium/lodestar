@@ -97,13 +97,17 @@ export function getExpectedWithdrawals(state: CachedBeaconStateCapella): {
       });
       withdrawalIndex++;
     } else if (validator.effectiveBalance === MAX_EFFECTIVE_BALANCE && balance > MAX_EFFECTIVE_BALANCE) {
-      withdrawals.push({
-        index: withdrawalIndex,
-        validatorIndex,
-        address: validator.withdrawalCredentials.slice(12),
-        amount: BigInt(balance - MAX_EFFECTIVE_BALANCE),
-      });
-      withdrawalIndex++;
+      // This type of withdrawls are not exist in canxium, balance will never > MAX_EFFECTIVE_BALANCE because we dont have staking reward.
+      // however, our minimum staking CAU is 320, not 32. But to make sure the system work without problem, we did increase MAX_EFFECTIVE_BALANCE to 320 CAU.
+      // Will disable this to not allow withdrawa 288 CAU
+      
+      // withdrawals.push({
+      //   index: withdrawalIndex,
+      //   validatorIndex,
+      //   address: validator.withdrawalCredentials.slice(12),
+      //   amount: BigInt(balance - MAX_EFFECTIVE_BALANCE),
+      // });
+      // withdrawalIndex++;
     }
 
     // Break if we have enough to pack the block
