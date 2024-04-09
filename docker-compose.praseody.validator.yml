@@ -1,0 +1,73 @@
+version: "3.4"
+services:
+  ssl:
+    image: itzg/openssl-ubuntu:latest
+    volumes:
+      - canxium:/canxium
+    command: rand -hex 32 | tr -d "\n" > "/canxium/jwt.hex"
+
+  init:
+    image: canxium/go-canxium:praseody
+    depends_on:
+      ssl:
+        condition: service_completed_successfully
+    volumes:
+      - canxium:/canxium
+    command: --datadir=/canxium --db.engine=pebble init /genesis/praseody.genesis.json
+
+  canxium:
+    image: canxium/go-canxium:praseody
+    restart: always
+    volumes:
+      - canxium:/canxium
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    ports:
+      - "30303:30303"
+    healthcheck:
+      test: curl --location http://127.0.0.1:8545 || exit 1
+      interval: 40s
+      timeout: 30s
+      retries: 3
+      start_period: 60s
+    command: --http --db.engine=pebble --syncmode "full" --gcmode "archive" --authrpc.addr 0.0.0.0 --authrpc.jwtsecret=/canxium/jwt.hex --authrpc.vhosts=canxium --networkid 30203 --datadir /canxium --bootnodes enode://9046044c5d6801d927ddaace0bc96dafa8999f8f5ee6e10bb91bc96bc80347afa77152d7a95c16d247d0faf17323850ca8c4cdd6845138014cc5c5c93fee5323@195.35.45.155:30303,enode://7918d918a36654eeaa860870dbad186553823aa386896b3326a0e8ba1cd60ed78242fad33f691248e1554c87237fb90da70eaa149fe04e7541809e4a835fbd14@15.235.141.136:30303
+
+  beacon_node:
+    image: canxium/lodestar:v1.17.0
+    restart: always
+    volumes:
+      - beacon_node:/data
+      - canxium:/canxium
+      - logs:/logs
+    ports:
+      - "9000:9000" # P2P port
+      - "9596:9596" # API port
+    depends_on:
+      ssl:
+        condition: service_completed_successfully
+      canxium:
+        condition: service_started
+    command: beacon --network praseody --dataDir /data --rest --rest.address 0.0.0.0 --metrics --logFile /logs/beacon.log --logFileLevel info --logLevel info --logFileDailyRotate 5 --jwtSecret /canxium/jwt.hex --execution.urls http://canxium:8551 --checkpointSyncUrl https://pr-beacon.canxium.net
+    environment:
+      NODE_OPTIONS: --max-old-space-size=8192
+
+  validator:
+    image: canxium/lodestar:v1.17.0
+    restart: always
+    volumes:
+      - validator:/data
+      - logs:/logs
+      - ./keystores:/keystores
+    depends_on:
+      beacon_node:
+        condition: service_started
+    command: validator --network praseody --suggestedFeeRecipient 0x700543993F39e38DEC6626Ae37Ef3fC47137Dcb4 --dataDir /data --importKeystores /keystores --importKeystoresPassword /keystores/password.txt --server http://beacon_node:9596 --logFile /logs/validator.log --logFileLevel debug --logFileDailyRotate 5
+    environment:
+      NODE_OPTIONS: --max-old-space-size=2048
+
+volumes:
+  validator:
+  logs:
+  canxium:
+  beacon_node:
