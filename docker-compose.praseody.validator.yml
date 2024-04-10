@@ -31,7 +31,7 @@ services:
       timeout: 30s
       retries: 3
       start_period: 60s
-    command: --http --db.engine=pebble --syncmode "full" --gcmode "archive" --authrpc.addr 0.0.0.0 --authrpc.jwtsecret=/canxium/jwt.hex --authrpc.vhosts=canxium --networkid 30203 --datadir /canxium --bootnodes enode://9046044c5d6801d927ddaace0bc96dafa8999f8f5ee6e10bb91bc96bc80347afa77152d7a95c16d247d0faf17323850ca8c4cdd6845138014cc5c5c93fee5323@195.35.45.155:30303,enode://7918d918a36654eeaa860870dbad186553823aa386896b3326a0e8ba1cd60ed78242fad33f691248e1554c87237fb90da70eaa149fe04e7541809e4a835fbd14@15.235.141.136:30303
+    command: --http --db.engine=pebble --syncmode snap --authrpc.addr 0.0.0.0 --authrpc.jwtsecret=/canxium/jwt.hex --authrpc.vhosts=canxium --networkid 30203 --datadir /canxium --bootnodes enode://9046044c5d6801d927ddaace0bc96dafa8999f8f5ee6e10bb91bc96bc80347afa77152d7a95c16d247d0faf17323850ca8c4cdd6845138014cc5c5c93fee5323@195.35.45.155:30303,enode://7918d918a36654eeaa860870dbad186553823aa386896b3326a0e8ba1cd60ed78242fad33f691248e1554c87237fb90da70eaa149fe04e7541809e4a835fbd14@15.235.141.136:30303
 
   beacon_node:
     image: canxium/lodestar:v1.17.0
