@@ -18,6 +18,7 @@ export type BeaconPreset = {
   // Gwei Values
   MIN_DEPOSIT_AMOUNT: number;
   MAX_EFFECTIVE_BALANCE: number;
+  MAX_EXCESS_BALANCE: number;
   EFFECTIVE_BALANCE_INCREMENT: number;
 
   // Time parameters
@@ -37,6 +38,7 @@ export type BeaconPreset = {
 
   // Reward and penalty quotients
   BASE_REWARD_FACTOR: number;
+  BASE_PENALTY_FACTOR: number;
   WHISTLEBLOWER_REWARD_QUOTIENT: number;
   PROPOSER_REWARD_QUOTIENT: number;
   INACTIVITY_PENALTY_QUOTIENT: number;
@@ -103,6 +105,7 @@ export const beaconPresetTypes: BeaconPresetTypes = {
   // Gwei Values
   MIN_DEPOSIT_AMOUNT: "number",
   MAX_EFFECTIVE_BALANCE: "number",
+  MAX_EXCESS_BALANCE: "number",
   EFFECTIVE_BALANCE_INCREMENT: "number",
 
   // Time parameters
@@ -122,6 +125,7 @@ export const beaconPresetTypes: BeaconPresetTypes = {
 
   // Reward and penalty quotients
   BASE_REWARD_FACTOR: "number",
+  BASE_PENALTY_FACTOR: "number",
   WHISTLEBLOWER_REWARD_QUOTIENT: "number",
   PROPOSER_REWARD_QUOTIENT: "number",
   INACTIVITY_PENALTY_QUOTIENT: "number",

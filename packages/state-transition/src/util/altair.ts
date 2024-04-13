@@ -1,4 +1,4 @@
-import {BASE_REWARD_FACTOR, EFFECTIVE_BALANCE_INCREMENT} from "@lodestar/params";
+import {BASE_REWARD_FACTOR, BASE_PENALTY_FACTOR, EFFECTIVE_BALANCE_INCREMENT} from "@lodestar/params";
 import {bigIntSqrt, bnToNum} from "@lodestar/utils";
 
 /**
@@ -8,6 +8,17 @@ import {bigIntSqrt, bnToNum} from "@lodestar/utils";
 export function computeBaseRewardPerIncrement(totalActiveStakeByIncrement: number): number {
   return Math.floor(
     (EFFECTIVE_BALANCE_INCREMENT * BASE_REWARD_FACTOR) /
+      bnToNum(bigIntSqrt(BigInt(totalActiveStakeByIncrement) * BigInt(EFFECTIVE_BALANCE_INCREMENT)))
+  );
+}
+
+/**
+ * Before we manage bigIntSqrt(totalActiveStake) as BigInt and return BigInt.
+ * bigIntSqrt(totalActiveStake) should fit a number (2 ** 53 -1 max)
+ **/
+export function computeBasePenaltyPerIncrement(totalActiveStakeByIncrement: number): number {
+  return Math.floor(
+    (EFFECTIVE_BALANCE_INCREMENT * BASE_PENALTY_FACTOR) /
       bnToNum(bigIntSqrt(BigInt(totalActiveStakeByIncrement) * BigInt(EFFECTIVE_BALANCE_INCREMENT)))
   );
 }

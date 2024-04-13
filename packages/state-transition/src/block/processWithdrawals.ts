@@ -2,6 +2,7 @@ import {byteArrayEquals, toHexString} from "@chainsafe/ssz";
 import {ssz, capella} from "@lodestar/types";
 import {
   MAX_EFFECTIVE_BALANCE,
+  MAX_EXCESS_BALANCE,
   MAX_WITHDRAWALS_PER_PAYLOAD,
   MAX_VALIDATORS_PER_WITHDRAWALS_SWEEP,
 } from "@lodestar/params";
@@ -96,18 +97,14 @@ export function getExpectedWithdrawals(state: CachedBeaconStateCapella): {
         amount: BigInt(balance),
       });
       withdrawalIndex++;
-    } else if (validator.effectiveBalance === MAX_EFFECTIVE_BALANCE && balance > MAX_EFFECTIVE_BALANCE) {
-      // This type of withdrawls are not exist in canxium, balance will never > MAX_EFFECTIVE_BALANCE because we dont have staking reward.
-      // however, our minimum staking CAU is 320, not 32. But to make sure the system work without problem, we did increase MAX_EFFECTIVE_BALANCE to 320 CAU.
-      // Will disable this to not allow withdrawa 288 CAU
-      
-      // withdrawals.push({
-      //   index: withdrawalIndex,
-      //   validatorIndex,
-      //   address: validator.withdrawalCredentials.slice(12),
-      //   amount: BigInt(balance - MAX_EFFECTIVE_BALANCE),
-      // });
-      // withdrawalIndex++;
+    } else if (validator.effectiveBalance === MAX_EFFECTIVE_BALANCE && balance > MAX_EXCESS_BALANCE) {
+      withdrawals.push({
+        index: withdrawalIndex,
+        validatorIndex,
+        address: validator.withdrawalCredentials.slice(12),
+        amount: BigInt(balance - MAX_EXCESS_BALANCE),
+      });
+      withdrawalIndex++;
     }
 
     // Break if we have enough to pack the block

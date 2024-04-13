@@ -12,7 +12,7 @@ type GlobalSingleArgs = {
   presetFile?: string;
 };
 
-export const defaultNetwork: NetworkName = "mainnet";
+export const defaultNetwork: NetworkName = "canxium";
 
 const globalSingleOptions: CliCommandOptions<GlobalSingleArgs> = {
   dataDir: {

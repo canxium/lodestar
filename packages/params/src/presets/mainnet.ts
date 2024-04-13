@@ -28,6 +28,8 @@ export const mainnetPreset: BeaconPreset = {
   MIN_DEPOSIT_AMOUNT: 1000000000,
   // 2**5 * 10**9 (= 32,000,000,000) Gwei
   MAX_EFFECTIVE_BALANCE: 32000000000,
+  // 2**5 * 10**10 (= 320,000,000,000) Gwei
+  MAX_EXCESS_BALANCE: 320000000000,
   // 2**0 * 10**9 (= 1,000,000,000) Gwei
   EFFECTIVE_BALANCE_INCREMENT: 1000000000,
 
@@ -63,6 +65,8 @@ export const mainnetPreset: BeaconPreset = {
   // ---------------------------------------------------------------
   // 2**6 (= 64)
   BASE_REWARD_FACTOR: 0,
+  // 2**6 (= 64)
+  BASE_PENALTY_FACTOR: 128,
   // 2**9 (= 512)
   WHISTLEBLOWER_REWARD_QUOTIENT: 512,
   // 2**3 (= 8)
@@ -98,7 +102,7 @@ export const mainnetPreset: BeaconPreset = {
 
   // BELLATRIX
   ////////////
-  INACTIVITY_PENALTY_QUOTIENT_BELLATRIX: 16777216,
+  INACTIVITY_PENALTY_QUOTIENT_BELLATRIX: 4194304,
   MIN_SLASHING_PENALTY_QUOTIENT_BELLATRIX: 32,
   PROPORTIONAL_SLASHING_MULTIPLIER_BELLATRIX: 3,
   MAX_BYTES_PER_TRANSACTION: 1073741824,

@@ -1,4 +1,4 @@
-import {gnosisChainConfig} from "@lodestar/config/networks";
+import {praseodyChainConfig, gnosisChainConfig} from "@lodestar/config/networks";
 import {minimalChainConfig, mainnetChainConfig} from "@lodestar/config/configs";
 import {ACTIVE_PRESET, PresetName} from "@lodestar/params";
 
@@ -12,6 +12,9 @@ switch (ACTIVE_PRESET) {
     break;
   case PresetName.gnosis:
     chainConfig = gnosisChainConfig;
+    break;
+  case PresetName.praseody:
+    chainConfig = praseodyChainConfig;
     break;
   default:
     throw Error(`Preset ${ACTIVE_PRESET} not supported with dev command`);

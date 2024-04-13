@@ -51,6 +51,7 @@ services:
     command: beacon --network praseody --dataDir /data --rest --rest.address 0.0.0.0 --metrics --logFile /logs/beacon.log --logFileLevel info --logLevel info --logFileDailyRotate 5 --jwtSecret /canxium/jwt.hex --execution.urls http://canxium:8551 --checkpointSyncUrl https://pr-beacon.canxium.net
     environment:
       NODE_OPTIONS: --max-old-space-size=8192
+      LODESTAR_PRESET: praseody
 
   validator:
     image: canxium/lodestar:v1.17.0
@@ -65,6 +66,7 @@ services:
     command: validator --network praseody --suggestedFeeRecipient 0x700543993F39e38DEC6626Ae37Ef3fC47137Dcb4 --dataDir /data --importKeystores /keystores --importKeystoresPassword /keystores/password.txt --server http://beacon_node:9596 --logFile /logs/validator.log --logFileLevel debug --logFileDailyRotate 5
     environment:
       NODE_OPTIONS: --max-old-space-size=2048
+      LODESTAR_PRESET: praseody
 
 volumes:
   validator:

@@ -2,6 +2,7 @@ import {PresetName} from "./presetName.js";
 import {mainnetPreset} from "./presets/mainnet.js";
 import {minimalPreset} from "./presets/minimal.js";
 import {gnosisPreset} from "./presets/gnosis.js";
+import {praseodyPreset} from "./presets/praseody.js";
 import {presetStatus} from "./presetStatus.js";
 import {userSelectedPreset, userOverrides} from "./setPreset.js";
 
@@ -14,6 +15,7 @@ const presets = {
   [PresetName.mainnet]: mainnetPreset,
   [PresetName.minimal]: minimalPreset,
   [PresetName.gnosis]: gnosisPreset,
+  [PresetName.praseody]: praseodyPreset,
 };
 
 // Once this file is imported, freeze the preset so calling setActivePreset() will throw an error
@@ -45,6 +47,7 @@ export const {
   HYSTERESIS_UPWARD_MULTIPLIER,
   MIN_DEPOSIT_AMOUNT,
   MAX_EFFECTIVE_BALANCE,
+  MAX_EXCESS_BALANCE,
   EFFECTIVE_BALANCE_INCREMENT,
   MIN_ATTESTATION_INCLUSION_DELAY,
   SLOTS_PER_EPOCH,
@@ -58,6 +61,7 @@ export const {
   HISTORICAL_ROOTS_LIMIT,
   VALIDATOR_REGISTRY_LIMIT,
   BASE_REWARD_FACTOR,
+  BASE_PENALTY_FACTOR,
   WHISTLEBLOWER_REWARD_QUOTIENT,
   PROPOSER_REWARD_QUOTIENT,
   INACTIVITY_PENALTY_QUOTIENT,

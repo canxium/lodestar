@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import {fromHexString as b} from "@chainsafe/ssz";
+import {PresetName} from "@lodestar/params";
 import {ChainConfig} from "../types.js";
 import {chainConfig as mainnet} from "../configs/mainnet.js";
 
@@ -7,6 +8,8 @@ import {chainConfig as mainnet} from "../configs/mainnet.js";
 
 export const praseodyChainConfig: ChainConfig = {
   ...mainnet,
+  
+  PRESET_BASE: PresetName.praseody,
   CONFIG_NAME: "praseody",
 
   MIN_GENESIS_TIME: 1712311200,

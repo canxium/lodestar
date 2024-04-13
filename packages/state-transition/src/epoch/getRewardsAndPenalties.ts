@@ -74,6 +74,7 @@ export function getRewardsAndPenaltiesAltair(
     let rewardPenaltyItem = rewardPenaltyItemCache.get(effectiveBalanceIncrement);
     if (!rewardPenaltyItem) {
       const baseReward = effectiveBalanceIncrement * cache.baseRewardPerIncrement;
+      const basePenalty = effectiveBalanceIncrement * cache.basePenaltyPerIncrement;
       const tsWeigh = PARTICIPATION_FLAG_WEIGHTS[TIMELY_SOURCE_FLAG_INDEX];
       const ttWeigh = PARTICIPATION_FLAG_WEIGHTS[TIMELY_TARGET_FLAG_INDEX];
       const thWeigh = PARTICIPATION_FLAG_WEIGHTS[TIMELY_HEAD_FLAG_INDEX];
@@ -88,8 +89,8 @@ export function getRewardsAndPenaltiesAltair(
         timelySourceReward: Math.floor(tsRewardNumerator / (activeIncrements * WEIGHT_DENOMINATOR)),
         timelyTargetReward: Math.floor(ttRewardNumerator / (activeIncrements * WEIGHT_DENOMINATOR)),
         timelyHeadReward: Math.floor(thRewardNumerator / (activeIncrements * WEIGHT_DENOMINATOR)),
-        timelySourcePenalty: Math.floor((baseReward * tsWeigh) / WEIGHT_DENOMINATOR),
-        timelyTargetPenalty: Math.floor((baseReward * ttWeigh) / WEIGHT_DENOMINATOR),
+        timelySourcePenalty: Math.floor((basePenalty * tsWeigh) / WEIGHT_DENOMINATOR),
+        timelyTargetPenalty: Math.floor((basePenalty * ttWeigh) / WEIGHT_DENOMINATOR),
       };
       rewardPenaltyItemCache.set(effectiveBalanceIncrement, rewardPenaltyItem);
     }

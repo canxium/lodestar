@@ -148,6 +148,7 @@ function getSpecCriticalParams(localConfig: ChainConfig): Record<keyof ConfigWit
     // Gwei Values
     MIN_DEPOSIT_AMOUNT: true,
     MAX_EFFECTIVE_BALANCE: true,
+    MAX_EXCESS_BALANCE: true,
     EFFECTIVE_BALANCE_INCREMENT: true,
 
     // Time parameters
@@ -167,6 +168,7 @@ function getSpecCriticalParams(localConfig: ChainConfig): Record<keyof ConfigWit
 
     // Reward and penalty quotients
     BASE_REWARD_FACTOR: true,
+    BASE_PENALTY_FACTOR: true,
     WHISTLEBLOWER_REWARD_QUOTIENT: true,
     PROPOSER_REWARD_QUOTIENT: true,
     INACTIVITY_PENALTY_QUOTIENT: true,

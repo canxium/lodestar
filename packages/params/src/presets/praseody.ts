@@ -1,20 +1,20 @@
 import {BeaconPreset} from "../types.js";
 
-// Minimal preset
-// https://github.com/ethereum/consensus-specs/tree/dev/presets/minimal
+// Mainnet preset
+// https://github.com/ethereum/consensus-specs/tree/dev/presets/mainnet
 
 /* eslint-disable @typescript-eslint/naming-convention */
-export const minimalPreset: BeaconPreset = {
+export const praseodyPreset: BeaconPreset = {
   // Misc
   // ---------------------------------------------------------------
-  // [customized] Just 4 committees for slot for testing purposes
-  MAX_COMMITTEES_PER_SLOT: 4,
-  // [customized] unsecure, but fast
-  TARGET_COMMITTEE_SIZE: 4,
+  // 2**6 (= 64)
+  MAX_COMMITTEES_PER_SLOT: 64,
+  // 2**7 (= 128)
+  TARGET_COMMITTEE_SIZE: 128,
   // 2**11 (= 2,048)
   MAX_VALIDATORS_PER_COMMITTEE: 2048,
-  // [customized] Faster, but unsecure.
-  SHUFFLE_ROUND_COUNT: 10,
+  // See issue 563
+  SHUFFLE_ROUND_COUNT: 90,
   // 4
   HYSTERESIS_QUOTIENT: 4,
   // 1 (minus 0.25)
@@ -28,35 +28,35 @@ export const minimalPreset: BeaconPreset = {
   MIN_DEPOSIT_AMOUNT: 1000000000,
   // 2**5 * 10**9 (= 32,000,000,000) Gwei
   MAX_EFFECTIVE_BALANCE: 32000000000,
-  // 2**5 * 10**10 (= 320,000,000,000) Gwei
+  // 2**5 * 10**10 (= 32,000,000,000) Gwei
   MAX_EXCESS_BALANCE: 320000000000,
   // 2**0 * 10**9 (= 1,000,000,000) Gwei
   EFFECTIVE_BALANCE_INCREMENT: 1000000000,
 
   // Time parameters
   // ---------------------------------------------------------------
-  // 2**0 (= 1) slots 6 seconds
+  // 2**0 (= 1) slots 12 seconds
   MIN_ATTESTATION_INCLUSION_DELAY: 1,
-  // [customized] fast epochs
-  SLOTS_PER_EPOCH: 8,
-  // 2**0 (= 1) epochs
+  // 2**5 (= 32) slots 6.4 minutes
+  SLOTS_PER_EPOCH: 32,
+  // 2**0 (= 1) epochs 6.4 minutes
   MIN_SEED_LOOKAHEAD: 1,
-  // 2**2 (= 4) epochs
+  // 2**2 (= 4) epochs 25.6 minutes
   MAX_SEED_LOOKAHEAD: 4,
-  // [customized] higher frequency new deposits from eth1 for testing
-  EPOCHS_PER_ETH1_VOTING_PERIOD: 4,
-  // [customized] smaller state
-  SLOTS_PER_HISTORICAL_ROOT: 64,
-  // 2**2 (= 4) epochs
+  // 2**6 (= 64) epochs ~6.8 hours
+  EPOCHS_PER_ETH1_VOTING_PERIOD: 64,
+  // 2**13 (= 8,192) slots ~13 hours
+  SLOTS_PER_HISTORICAL_ROOT: 8192,
+  // 2**2 (= 4) epochs 25.6 minutes
   MIN_EPOCHS_TO_INACTIVITY_PENALTY: 4,
 
   // State vector lengths
   // ---------------------------------------------------------------
-  // [customized] smaller state
-  EPOCHS_PER_HISTORICAL_VECTOR: 64,
-  // [customized] smaller state
-  EPOCHS_PER_SLASHINGS_VECTOR: 64,
-  // 2**24 (= 16,777,216) historical roots
+  // 2**16 (= 65,536) epochs ~0.8 years
+  EPOCHS_PER_HISTORICAL_VECTOR: 65536,
+  // 2**13 (= 8,192) epochs ~36 days
+  EPOCHS_PER_SLASHINGS_VECTOR: 8192,
+  // 2**24 (= 16,777,216) historical roots, ~26,131 years
   HISTORICAL_ROOTS_LIMIT: 16777216,
   // 2**40 (= 1,099,511,627,776) validator spots
   VALIDATOR_REGISTRY_LIMIT: 1099511627776,
@@ -64,18 +64,18 @@ export const minimalPreset: BeaconPreset = {
   // Reward and penalty quotients
   // ---------------------------------------------------------------
   // 2**6 (= 64)
-  BASE_REWARD_FACTOR: 64,
-  BASE_PENALTY_FACTOR: 64,
+  BASE_REWARD_FACTOR: 0,
+  // 2**6 (= 64)
+  BASE_PENALTY_FACTOR: 0,
   // 2**9 (= 512)
   WHISTLEBLOWER_REWARD_QUOTIENT: 512,
   // 2**3 (= 8)
   PROPOSER_REWARD_QUOTIENT: 8,
-  // [customized] 2**25 (= 33,554,432)
-  INACTIVITY_PENALTY_QUOTIENT: 33554432,
-  // [customized] 2**6 (= 64)
-  MIN_SLASHING_PENALTY_QUOTIENT: 64,
-  // [customized] 2 (lower safety margin than Phase 0 genesis but different than mainnet config for testing)
-  PROPORTIONAL_SLASHING_MULTIPLIER: 2,
+  // 2**26 (= 67,108,864)
+  INACTIVITY_PENALTY_QUOTIENT: 67108864,
+  // 2**7 (= 128) (lower safety margin at Phase 0 genesis)
+  MIN_SLASHING_PENALTY_QUOTIENT: 128,
+  PROPORTIONAL_SLASHING_MULTIPLIER: 1,
 
   // Max operations per block
   // ---------------------------------------------------------------
@@ -92,13 +92,13 @@ export const minimalPreset: BeaconPreset = {
 
   // ALTAIR
   /////////
-  SYNC_COMMITTEE_SIZE: 32,
-  EPOCHS_PER_SYNC_COMMITTEE_PERIOD: 8,
+  SYNC_COMMITTEE_SIZE: 512,
+  EPOCHS_PER_SYNC_COMMITTEE_PERIOD: 256,
   INACTIVITY_PENALTY_QUOTIENT_ALTAIR: 50331648,
   MIN_SLASHING_PENALTY_QUOTIENT_ALTAIR: 64,
   PROPORTIONAL_SLASHING_MULTIPLIER_ALTAIR: 2,
   MIN_SYNC_COMMITTEE_PARTICIPANTS: 1,
-  UPDATE_TIMEOUT: 64,
+  UPDATE_TIMEOUT: 8192,
 
   // BELLATRIX
   ////////////
@@ -113,13 +113,13 @@ export const minimalPreset: BeaconPreset = {
   // CAPELLA
   //////////
   MAX_BLS_TO_EXECUTION_CHANGES: 16,
-  MAX_WITHDRAWALS_PER_PAYLOAD: 4,
-  MAX_VALIDATORS_PER_WITHDRAWALS_SWEEP: 16,
+  MAX_WITHDRAWALS_PER_PAYLOAD: 16,
+  MAX_VALIDATORS_PER_WITHDRAWALS_SWEEP: 16384,
 
   // DENEB
   ///////////
   FIELD_ELEMENTS_PER_BLOB: 4096,
-  MAX_BLOB_COMMITMENTS_PER_BLOCK: 16,
+  MAX_BLOB_COMMITMENTS_PER_BLOCK: 4096,
   MAX_BLOBS_PER_BLOCK: 6,
-  KZG_COMMITMENT_INCLUSION_PROOF_DEPTH: 9,
+  KZG_COMMITMENT_INCLUSION_PROOF_DEPTH: 17,
 };

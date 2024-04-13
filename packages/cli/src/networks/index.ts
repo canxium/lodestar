@@ -20,9 +20,11 @@ import * as holesky from "./holesky.js";
 import * as chiado from "./chiado.js";
 import * as ephemery from "./ephemery.js";
 import * as praseody from "./praseody.js";
+import * as canxium from "./canxium.js";
 
 export type NetworkName =
   | "mainnet"
+  | "canxium"
   | "dev"
   | "gnosis"
   | "goerli"
@@ -34,6 +36,7 @@ export type NetworkName =
   | "praseody";
 export const networkNames: NetworkName[] = [
   "mainnet",
+  "canxium",
   "gnosis",
   "goerli",
   "ropsten",
@@ -87,6 +90,8 @@ export function getNetworkData(network: NetworkName): {
       return ephemery;
     case "praseody":
       return praseody;
+    case "canxium":
+      return canxium;
     default:
       throw Error(`Network not supported: ${network}`);
   }
