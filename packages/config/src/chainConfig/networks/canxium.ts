@@ -36,7 +36,7 @@ export const canxiumChainConfig: ChainConfig = {
   DENEB_FORK_VERSION: b("0x00304300"),
   DENEB_FORK_EPOCH: Infinity,
 
-  TERMINAL_TOTAL_DIFFICULTY: BigInt("79000000000000000000"), // estimate 559 786 blocks left (~ 55 days = 5 June 2024) if hashrate = 45TH
+  TERMINAL_TOTAL_DIFFICULTY: BigInt("80000000000000000000"), // estimate 559 786 blocks left (~ 55 days = 5 June 2024) if hashrate = 45TH
 
   SECONDS_PER_SLOT: 6,
   SECONDS_PER_ETH1_BLOCK: 6,
