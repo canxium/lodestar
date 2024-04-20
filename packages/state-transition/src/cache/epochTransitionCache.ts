@@ -16,7 +16,7 @@ import {
   FLAG_CURR_HEAD_ATTESTER,
 } from "../util/attesterStatus.js";
 import {CachedBeaconStateAllForks, CachedBeaconStateAltair, CachedBeaconStatePhase0} from "../index.js";
-import {computeBaseRewardPerIncrement, computeBasePenaltyPerIncrement} from "../util/altair.js";
+import {computeBaseRewardPerIncrement} from "../util/altair.js";
 import {processPendingAttestations} from "../epoch/processPendingAttestations.js";
 
 export type EpochTransitionCacheOpts = {
@@ -47,7 +47,6 @@ export interface EpochTransitionCache {
   totalActiveStakeByIncrement: number;
   /** For altair */
   baseRewardPerIncrement: number;
-  basePenaltyPerIncrement: number;
   prevEpochUnslashedStake: {
     sourceStakeByIncrement: number;
     targetStakeByIncrement: number;
@@ -303,7 +302,6 @@ export function beforeProcessEpoch(
 
   // SPEC: function getBaseRewardPerIncrement()
   const baseRewardPerIncrement = computeBaseRewardPerIncrement(totalActiveStakeByIncrement);
-  const basePenaltyPerIncrement = computeBasePenaltyPerIncrement(totalActiveStakeByIncrement);
 
   // To optimize process_registry_updates():
   // order by sequence of activationEligibilityEpoch setting and then index
@@ -409,7 +407,6 @@ export function beforeProcessEpoch(
     currentEpoch,
     totalActiveStakeByIncrement,
     baseRewardPerIncrement,
-    basePenaltyPerIncrement,
     prevEpochUnslashedStake: {
       sourceStakeByIncrement: prevSourceUnslStake,
       targetStakeByIncrement: prevTargetUnslStake,

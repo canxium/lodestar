@@ -65,7 +65,6 @@ export const minimalPreset: BeaconPreset = {
   // ---------------------------------------------------------------
   // 2**6 (= 64)
   BASE_REWARD_FACTOR: 64,
-  BASE_PENALTY_FACTOR: 64,
   // 2**9 (= 512)
   WHISTLEBLOWER_REWARD_QUOTIENT: 512,
   // 2**3 (= 8)

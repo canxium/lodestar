@@ -168,7 +168,6 @@ function getSpecCriticalParams(localConfig: ChainConfig): Record<keyof ConfigWit
 
     // Reward and penalty quotients
     BASE_REWARD_FACTOR: true,
-    BASE_PENALTY_FACTOR: true,
     WHISTLEBLOWER_REWARD_QUOTIENT: true,
     PROPOSER_REWARD_QUOTIENT: true,
     INACTIVITY_PENALTY_QUOTIENT: true,
