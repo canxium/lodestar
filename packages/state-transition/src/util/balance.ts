@@ -1,4 +1,4 @@
-import {EFFECTIVE_BALANCE_INCREMENT} from "@lodestar/params";
+import {EFFECTIVE_BALANCE_INCREMENT, MAX_EXCESS_BALANCE} from "@lodestar/params";
 import {Gwei, ValidatorIndex} from "@lodestar/types";
 import {bigIntMax} from "@lodestar/utils";
 import {EffectiveBalanceIncrements} from "../cache/effectiveBalanceIncrements.js";
@@ -28,7 +28,12 @@ export function getTotalBalance(state: BeaconStateAllForks, indices: ValidatorIn
  */
 export function increaseBalance(state: BeaconStateAllForks, index: ValidatorIndex, delta: number): void {
   // TODO: Inline this
-  state.balances.set(index, state.balances.get(index) + delta);
+  let balance = state.balances.get(index) + delta;
+  if (balance > MAX_EXCESS_BALANCE) {
+    balance = MAX_EXCESS_BALANCE;
+  }
+
+  state.balances.set(index, balance);
 }
 
 /**

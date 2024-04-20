@@ -1,4 +1,4 @@
-import {ForkSeq, GENESIS_EPOCH} from "@lodestar/params";
+import {ForkSeq, GENESIS_EPOCH, MAX_EXCESS_BALANCE } from "@lodestar/params";
 import {ssz} from "@lodestar/types";
 import {
   CachedBeaconStateAllForks,
@@ -29,6 +29,10 @@ export function processRewardsAndPenalties(
 
   for (let i = 0, len = rewards.length; i < len; i++) {
     balances[i] += rewards[i] - penalties[i] - (slashingPenalties[i] ?? 0);
+    // Canxium PoS don't pay reward if balance > MAX_EXCESS_BALANCE
+    if (balances[i] > MAX_EXCESS_BALANCE) {
+      balances[i] = MAX_EXCESS_BALANCE;
+    }
   }
 
   // important: do not change state one balance at a time. Set them all at once, constructing the tree in one go
