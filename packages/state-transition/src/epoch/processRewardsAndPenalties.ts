@@ -8,6 +8,7 @@ import {
 } from "../types.js";
 import {getAttestationDeltas} from "./getAttestationDeltas.js";
 import {getRewardsAndPenaltiesAltair} from "./getRewardsAndPenalties.js";
+import {increaseBalanceWithVal, decreaseBalanceWithVal} from "../util/index.js";
 
 /**
  * Iterate over all validator and compute rewards and penalties to apply to balances.
@@ -28,11 +29,10 @@ export function processRewardsAndPenalties(
   const balances = state.balances.getAll();
 
   for (let i = 0, len = rewards.length; i < len; i++) {
-    balances[i] += rewards[i] - penalties[i] - (slashingPenalties[i] ?? 0);
-    // Canxium PoS don't pay reward if balance > MAX_EXCESS_BALANCE
-    if (balances[i] > MAX_EXCESS_BALANCE) {
-      balances[i] = MAX_EXCESS_BALANCE;
-    }
+    let balance = balances[i];
+    balance = increaseBalanceWithVal(balance, rewards[i]);
+    balance = decreaseBalanceWithVal(balance, penalties[i] + (slashingPenalties[i] ?? 0));
+    balances[i] = balance;
   }
 
   // important: do not change state one balance at a time. Set them all at once, constructing the tree in one go

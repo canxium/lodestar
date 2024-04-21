@@ -103,6 +103,6 @@ export function processDeposit(fork: ForkSeq, state: CachedBeaconStateAllForks, 
     }
   } else {
     // increase balance by deposit amount
-    increaseBalance(state, cachedIndex, amount);
+    increaseBalance(state, cachedIndex, amount, true);
   }
 }

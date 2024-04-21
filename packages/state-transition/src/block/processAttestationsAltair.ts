@@ -122,7 +122,7 @@ export function processAttestationsAltair(
     proposerReward += Math.floor(proposerRewardNumerator / PROPOSER_REWARD_DOMINATOR);
   }
 
-  increaseBalance(state, epochCtx.getBeaconProposer(state.slot), proposerReward);
+  increaseBalance(state, epochCtx.getBeaconProposer(state.slot), proposerReward, false);
   state.proposerRewards.attestations = proposerReward;
 }
 

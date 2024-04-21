@@ -27,34 +27,25 @@ export function processSyncAggregate(
   const {syncParticipantReward, syncProposerReward} = state.epochCtx;
   const {syncCommitteeBits} = block.body.syncAggregate;
   const proposerIndex = state.epochCtx.getBeaconProposer(state.slot);
-  let proposerBalance = state.balances.get(proposerIndex);
+  let proposerReward = 0;
 
   for (let i = 0; i < SYNC_COMMITTEE_SIZE; i++) {
     const index = committeeIndices[i];
 
     if (syncCommitteeBits.get(i)) {
       // Positive rewards for participants
-      if (index === proposerIndex) {
-        proposerBalance += syncParticipantReward;
-      } else {
-        increaseBalance(state, index, syncParticipantReward);
-      }
+      increaseBalance(state, index, syncParticipantReward, false);
       // Proposer reward
-      proposerBalance += syncProposerReward;
+      proposerReward += syncProposerReward;
       state.proposerRewards.syncAggregate += syncProposerReward;
     } else {
       // Negative rewards for non participants
-      if (index === proposerIndex) {
-        proposerBalance = Math.max(0, proposerBalance - syncParticipantReward);
-      } else {
-        decreaseBalance(state, index, syncParticipantReward);
-      }
+      decreaseBalance(state, index, syncParticipantReward);
     }
   }
 
   // Apply proposer balance
-  proposerBalance = proposerBalance > MAX_EXCESS_BALANCE ? MAX_EXCESS_BALANCE : proposerBalance;
-  state.balances.set(proposerIndex, proposerBalance);
+  increaseBalance(state, proposerIndex, proposerReward, false);
 }
 
 export function getSyncCommitteeSignatureSet(

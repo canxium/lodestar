@@ -26,14 +26,27 @@ export function getTotalBalance(state: BeaconStateAllForks, indices: ValidatorIn
 /**
  * Increase the balance for a validator with the given ``index`` by ``delta``.
  */
-export function increaseBalance(state: BeaconStateAllForks, index: ValidatorIndex, delta: number): void {
+export function increaseBalance(state: BeaconStateAllForks, index: ValidatorIndex, delta: number, deposit: boolean): void {
   // TODO: Inline this
-  let balance = state.balances.get(index) + delta;
-  if (balance > MAX_EXCESS_BALANCE) {
-    balance = MAX_EXCESS_BALANCE;
+  let balance = state.balances.get(index);
+  if (deposit) {
+    state.balances.set(index, balance + delta);
+  } else if (balance < MAX_EXCESS_BALANCE) {
+    let newBalance = balance + delta;
+    state.balances.set(index, newBalance > MAX_EXCESS_BALANCE ? MAX_EXCESS_BALANCE : newBalance);
+  }
+}
+
+/**
+ * Increase the balance for a validator with the given ``currentBalance`` by ``delta`` in memory, not set to state.
+ */
+export function increaseBalanceWithVal(currentBalance: number, delta: number): number {
+  if (currentBalance >= MAX_EXCESS_BALANCE) {
+    return currentBalance;
   }
 
-  state.balances.set(index, balance);
+  const newBalance = currentBalance + delta;
+  return newBalance > MAX_EXCESS_BALANCE ? MAX_EXCESS_BALANCE : newBalance;
 }
 
 /**
@@ -46,6 +59,14 @@ export function decreaseBalance(state: BeaconStateAllForks, index: ValidatorInde
   const newBalance = currentBalance > delta ? state.balances.get(index) - delta : 0;
   // TODO: Is it necessary to protect against underflow here? Add unit test
   state.balances.set(index, Math.max(0, newBalance));
+}
+
+/**
+ * Decrease the balance for a validator with the given ``currentBalance`` by ``delta`` in memory, not set to state.
+ */
+export function decreaseBalanceWithVal(currentBalance: number, delta: number): number {
+  const newBalance = currentBalance > delta ? currentBalance - delta : 0;
+  return newBalance;
 }
 
 /**

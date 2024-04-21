@@ -65,11 +65,11 @@ export function slashValidator(
   const proposerIndex = epochCtx.getBeaconProposer(state.slot);
   if (whistleblowerIndex === undefined || !Number.isSafeInteger(whistleblowerIndex)) {
     // Call increaseBalance() once with `(whistleblowerReward - proposerReward) + proposerReward`
-    increaseBalance(state, proposerIndex, whistleblowerReward);
+    increaseBalance(state, proposerIndex, whistleblowerReward, false);
     state.proposerRewards.slashing += whistleblowerReward;
   } else {
-    increaseBalance(state, proposerIndex, proposerReward);
-    increaseBalance(state, whistleblowerIndex, whistleblowerReward - proposerReward);
+    increaseBalance(state, proposerIndex, proposerReward, false);
+    increaseBalance(state, whistleblowerIndex, whistleblowerReward - proposerReward, false);
     state.proposerRewards.slashing += proposerReward;
   }
 

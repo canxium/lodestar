@@ -64,7 +64,7 @@ export const mainnetPreset: BeaconPreset = {
   // Reward and penalty quotients
   // ---------------------------------------------------------------
   // 2**6 (= 64)
-  BASE_REWARD_FACTOR: 1024,
+  BASE_REWARD_FACTOR: 512,
   // 2**9 (= 512)
   WHISTLEBLOWER_REWARD_QUOTIENT: 512,
   // 2**3 (= 8)
