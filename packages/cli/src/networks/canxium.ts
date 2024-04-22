@@ -3,7 +3,7 @@ export {canxiumChainConfig as chainConfig} from "@lodestar/config/networks";
 /* eslint-disable max-len */
 
 export const depositContractDeployBlock = 3459834;
-export const genesisFileUrl = null;
+export const genesisFileUrl = "https://raw.githubusercontent.com/canxium/genesis/main/mainnet/genesis.ssz";
 export const bootnodesFileUrl = null;
 
 export const bootEnrs = [

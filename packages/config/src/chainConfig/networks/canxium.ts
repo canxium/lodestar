@@ -9,11 +9,11 @@ export const canxiumChainConfig: ChainConfig = {
   ...mainnet,
   CONFIG_NAME: "canxium",
 
-  MIN_GENESIS_TIME: 1713675600, // Apr 21, 2024, 1209 AM UTC
+  MIN_GENESIS_TIME: 1713657600, // Apr 21, 2024, 00:00 AM UTC
 
-  MIN_GENESIS_ACTIVE_VALIDATOR_COUNT: 164,
+  MIN_GENESIS_ACTIVE_VALIDATOR_COUNT: 166,
 
-  GENESIS_DELAY: 777600, // 9 days
+  GENESIS_DELAY: 779671, // 9 days
 
   // Praseody testnet
   DEPOSIT_CHAIN_ID: 3003,
