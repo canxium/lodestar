@@ -8,11 +8,9 @@ import {chainConfig as mainnet} from "../configs/mainnet.js";
 
 export const praseodyChainConfig: ChainConfig = {
   ...mainnet,
-  
-  PRESET_BASE: PresetName.praseody,
   CONFIG_NAME: "praseody",
 
-  MIN_GENESIS_TIME: 1712311200,
+  MIN_GENESIS_TIME: 1716360347,
 
   MIN_GENESIS_ACTIVE_VALIDATOR_COUNT: 164,
 
@@ -39,7 +37,7 @@ export const praseodyChainConfig: ChainConfig = {
   DENEB_FORK_VERSION: b("0x00326300"),
   DENEB_FORK_EPOCH: Infinity,
 
-  TERMINAL_TOTAL_DIFFICULTY: BigInt("1016000000"),
+  TERMINAL_TOTAL_DIFFICULTY: BigInt("338823530"),
 
   SECONDS_PER_SLOT: 6,
   SECONDS_PER_ETH1_BLOCK: 6,
